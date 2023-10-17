@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">NBAPlayers</string>
+    <string name="app_name">NbaPlayers</string>
+
+    <!-- MARK: - Home Screen -->
+    <string name="home_screen_title">Players</string>
+    <string name="home_screen_team">Team:</string>
 </resources>

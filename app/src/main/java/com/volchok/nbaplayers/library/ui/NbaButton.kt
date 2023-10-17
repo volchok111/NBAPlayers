@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.volchok.nbaplayers.library.ui.NbaColors.pink
+import com.volchok.nbaplayers.library.ui.NbaColors.black
 import com.volchok.nbaplayers.library.ui.NbaColors.chrome300
 import com.volchok.nbaplayers.library.ui.NbaColors.chrome700
 import com.volchok.nbaplayers.library.ui.NbaColors.white
@@ -46,7 +46,7 @@ fun NbaSecondaryButton(
         modifier = modifier,
         text = text,
         enabled = enabled,
-        border = BorderStroke(2.dp, pink),
+        border = BorderStroke(2.dp, black),
         colors = secondaryColors()
     )
 }
@@ -112,14 +112,14 @@ private fun NbaButton(
 private fun primaryColors() = androidx.compose.material.ButtonDefaults.buttonColors(
     contentColor = white,
     disabledContentColor = chrome300,
-    backgroundColor = pink,
+    backgroundColor = black,
     disabledBackgroundColor = chrome700
 
 )
 
 @Composable
 private fun secondaryColors() = androidx.compose.material.ButtonDefaults.buttonColors(
-    contentColor = pink,
+    contentColor = black,
     disabledContentColor = chrome300,
     backgroundColor = white,
     disabledBackgroundColor = chrome700
@@ -127,7 +127,7 @@ private fun secondaryColors() = androidx.compose.material.ButtonDefaults.buttonC
 
 @Composable
 private fun actionColors() = androidx.compose.material.ButtonDefaults.buttonColors(
-    contentColor = pink,
+    contentColor = black,
     disabledContentColor = chrome300,
     backgroundColor = Color.Transparent,
     disabledBackgroundColor = Color.Transparent

@@ -14,8 +14,8 @@ object NbaColors {
 
     val background = Color(0xFFf6f6f6)
 
+    val black = Color(0xFF000000)
     val white = Color(0xFFFFFFFF)
-    val pink = Color(0xFFf25187)
 
     val red500 = Color(0xFFD22121)
 }
