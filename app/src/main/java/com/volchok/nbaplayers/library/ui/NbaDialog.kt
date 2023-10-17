@@ -1,7 +1,14 @@
 package com.volchok.nbaplayers.library.ui
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -14,8 +21,8 @@ import androidx.compose.ui.Alignment.Companion.BottomEnd
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.volchok.nbaplayers.library.ui.NbaColors.black
 import com.volchok.nbaplayers.library.ui.NbaColors.chrome900
-import com.volchok.nbaplayers.library.ui.NbaColors.pink
 import com.volchok.nbaplayers.library.ui.NbaColors.white
 
 @Composable
@@ -86,7 +93,7 @@ fun NbaAlertDialog(
                             modifier = Modifier
                                 .clickable { onPositiveButtonClick() }
                                 .padding(end = NbaDimensions.sizeXS),
-                            color = pink,
+                            color = black,
                         )
                     }
                 }

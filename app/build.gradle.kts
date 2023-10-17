@@ -89,6 +89,9 @@ dependencies {
     //Lottie Icons
     implementation ("com.airbnb.android:lottie-compose:6.0.0")
 
+    //Glide
+    implementation("com.github.bumptech.glide:compose:1.0.0-beta01")
+
     //Tests
     testImplementation ("io.mockk:mockk:1.13.2")
     testImplementation ("io.mockk:mockk-agent-jvm:1.13.3")

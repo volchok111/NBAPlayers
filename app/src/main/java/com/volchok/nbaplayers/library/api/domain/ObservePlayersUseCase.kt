@@ -6,10 +6,10 @@ import com.volchok.nbaplayers.library.use_case.SuspendUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class ObserveCharactersUseCase(
+class ObservePlayersUseCase(
     private val repository: RemoteRepository,
 ) : SuspendUseCase<Unit, Flow<Data<List<PlayerModel>>>> {
-    override suspend fun invoke(input: Unit): Flow<Data<List<PlayerModel>>>  = flow {
+    override suspend fun invoke(input: Unit): Flow<Data<List<PlayerModel>>> = flow {
         emit(repository.getCharacters())
     }
 }

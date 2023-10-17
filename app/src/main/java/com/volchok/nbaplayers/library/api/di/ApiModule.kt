@@ -2,7 +2,7 @@ package com.volchok.nbaplayers.library.api.di
 
 import com.volchok.nbaplayers.library.api.data.NbaApi
 import com.volchok.nbaplayers.library.api.data.RickMortyRepository
-import com.volchok.nbaplayers.library.api.domain.ObserveCharactersUseCase
+import com.volchok.nbaplayers.library.api.domain.ObservePlayersUseCase
 import com.volchok.nbaplayers.library.api.domain.RemoteRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -34,6 +34,6 @@ val apiModule = module {
             .create(NbaApi::class.java)
     }
 
-    factoryOf(::ObserveCharactersUseCase)
+    factoryOf(::ObservePlayersUseCase)
     factoryOf(::RickMortyRepository) bind RemoteRepository::class
 }
