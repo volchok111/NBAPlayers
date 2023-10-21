@@ -1,8 +1,7 @@
-package com.volchok.nbaplayers.library.paging.data
+package com.volchok.nbaplayers.library.api.data
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.volchok.nbaplayers.library.api.data.NbaApi
 import com.volchok.nbaplayers.library.api.model.PlayerModel
 
 class PlayerPagingSource(

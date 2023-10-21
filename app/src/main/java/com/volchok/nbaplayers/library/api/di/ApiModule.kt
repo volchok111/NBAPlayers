@@ -1,12 +1,17 @@
 package com.volchok.nbaplayers.library.api.di
 
 import com.volchok.nbaplayers.library.api.data.NbaApi
+import com.volchok.nbaplayers.library.api.domain.RemoteRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.core.module.dsl.factoryOf
+import org.koin.dsl.bind
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import com.volchok.nbaplayers.library.api.data.PlayerRepository
+import com.volchok.nbaplayers.library.api.domain.ObservePlayersUseCase
 
 val apiModule = module {
     factory {
@@ -29,5 +34,6 @@ val apiModule = module {
             .create(NbaApi::class.java)
     }
 
-  //  factoryOf(::RemoteRepositoryImpl) bind RemoteRepository::class
+    factoryOf(::ObservePlayersUseCase)
+    factoryOf(::PlayerRepository) bind RemoteRepository::class
 }
