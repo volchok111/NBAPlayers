@@ -21,6 +21,11 @@ import androidx.compose.ui.Alignment.Companion.BottomEnd
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
+import com.volchok.nbaplayers.R
 import com.volchok.nbaplayers.library.ui.NbaColors.black
 import com.volchok.nbaplayers.library.ui.NbaColors.chrome900
 import com.volchok.nbaplayers.library.ui.NbaColors.white
@@ -43,7 +48,7 @@ fun NbaAlertDialog(
         onDismissRequest = onDismiss,
         properties = dialogProperties,
 
-    ) {
+        ) {
         Surface(
             modifier = modifier,
             shape = RoundedCornerShape(NbaDimensions.sizeXXS),
@@ -110,12 +115,12 @@ fun NbaLoadingDialog(
     text: String? = null,
 ) {
     val isLoading by remember { mutableStateOf(true) }
-   // val composition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(com.volchok.rocketapp.R.raw.rocket))
-//    val progress by animateLottieCompositionAsState(
-//        composition = composition,
-//        isPlaying = isLoading,
-//        iterations = 1000
-//    )
+    val composition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.basketball))
+    val progress by animateLottieCompositionAsState(
+        composition = composition,
+        isPlaying = isLoading,
+        iterations = 1000
+    )
     Surface(
         modifier = modifier.fillMaxSize(),
         shape = RoundedCornerShape(NbaDimensions.sizeS),
@@ -137,9 +142,9 @@ fun NbaLoadingDialog(
                 )
             }
             Spacer(modifier = Modifier.height(NbaDimensions.sizeM))
-//            LottieAnimation(
-//                composition = composition,
-//                progress = { progress })
+            LottieAnimation(
+                composition = composition,
+                progress = { progress })
             Spacer(modifier = Modifier.height(NbaDimensions.sizeXXS))
         }
     }
