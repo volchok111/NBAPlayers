@@ -16,7 +16,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,7 +24,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
@@ -50,14 +48,16 @@ fun HomeScreen() {
 
     HomeScreenImpl(
         pagingData = pagingItems,
-        state = state.value
+        state = state.value,
+        viewModel::onItem
     )
 }
 
 @Composable
 private fun HomeScreenImpl(
     pagingData: LazyPagingItems<PlayerModel>,
-    state: HomeViewModel.State
+    state: HomeViewModel.State,
+    onItem: (Int) -> Unit
 ) {
     LazyColumn(
         modifier = Modifier
@@ -75,7 +75,7 @@ private fun HomeScreenImpl(
             Spacer(modifier = Modifier.height(sizeXS))
             ListItem(
                 modifier = Modifier
-                    .clickable { pagingData[index]?.id },
+                    .clickable { pagingData[index]?.id?.let { onItem(it) } },
                 firstName = pagingData[index]?.first_name.orEmpty(),
                 lastName = pagingData[index]?.last_name.orEmpty(),
                 teamName = pagingData[index]?.team?.full_name.orEmpty()

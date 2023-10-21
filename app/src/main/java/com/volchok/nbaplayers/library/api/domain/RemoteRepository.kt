@@ -1,8 +1,13 @@
 package com.volchok.nbaplayers.library.api.domain
 
+import androidx.paging.PagingData
 import com.volchok.nbaplayers.library.api.model.PlayerModel
+import com.volchok.nbaplayers.library.api.model.details.PlayerDetailsEntity
 import com.volchok.nbaplayers.library.data.model.Data
+import kotlinx.coroutines.flow.Flow
 
-//interface RemoteRepository {
-//    suspend fun getCharacters(): Data<List<PlayerModel>>
-//}
+interface RemoteRepository {
+    fun getPlayers(): Data<Flow<PagingData<PlayerModel>>>
+
+   suspend fun getPlayerDetails(id: Int): Data<PlayerDetailsEntity>
+}

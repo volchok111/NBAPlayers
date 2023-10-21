@@ -17,6 +17,7 @@ import com.volchok.nbaplayers.app.model.BackNavigationEvent
 import com.volchok.nbaplayers.app.model.ForwardNavigationEvent
 import com.volchok.nbaplayers.app.model.Route
 import com.volchok.nbaplayers.app.presentation.MainViewModel
+import com.volchok.nbaplayers.feature.details.ui.DetailsScreen
 import com.volchok.nbaplayers.feature.home.ui.HomeScreen
 import com.volchok.nbaplayers.ui.theme.NBAPlayersTheme
 import org.koin.androidx.compose.getViewModel
@@ -72,6 +73,7 @@ private fun Screens(
         modifier = modifier
     ) {
         composable(Route.Home()) { HomeScreen() }
+        composable(Route.Details()) { DetailsScreen() }
     }
 }
 
