@@ -20,6 +20,8 @@ class GlobalNavigationController :
 
     override fun goBack() = goTo(BackNavigationEvent)
 
+    override fun goHome() = goTo(ForwardNavigationEvent(Route.Home, true))
+
     override fun goToPlayerInfo() = goTo(ForwardNavigationEvent(Route.Details))
 
     private fun goTo(navigationEvent: NavigationEvent) {
