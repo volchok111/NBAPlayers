@@ -5,13 +5,15 @@ import com.volchok.nbaplayers.app.model.BackNavigationEvent
 import com.volchok.nbaplayers.app.model.ForwardNavigationEvent
 import com.volchok.nbaplayers.app.model.NavigationEvent
 import com.volchok.nbaplayers.app.model.Route
+import com.volchok.nbaplayers.feature.details.domain.DetailsNavigationController
 import com.volchok.nbaplayers.feature.home.domain.HomeNavigationController
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 
 class GlobalNavigationController :
     MainNavigationController,
-    HomeNavigationController {
+    HomeNavigationController,
+    DetailsNavigationController {
 
     private val _navigationEvent = MutableSharedFlow<NavigationEvent>(extraBufferCapacity = 1)
     override val navigationEvent = _navigationEvent.asSharedFlow()

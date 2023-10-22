@@ -1,6 +1,7 @@
 package com.volchok.nbaplayers.feature.details.presentation
 
 import androidx.lifecycle.viewModelScope
+import com.volchok.nbaplayers.feature.details.domain.GoBackUseCase
 import com.volchok.nbaplayers.library.api.model.details.PlayerDetailsEntity
 import com.volchok.nbaplayers.library.memory.domain.FetchPlayerDetailsUseCase
 import com.volchok.nbaplayers.library.memory.domain.ObservePlayerDetailsUseCase
@@ -10,7 +11,8 @@ import kotlinx.coroutines.launch
 
 class DetailsViewModel(
     private val fetchPlayerDetailsUseCase: FetchPlayerDetailsUseCase,
-    private val observePlayerDetailsUseCase: ObservePlayerDetailsUseCase
+    private val observePlayerDetailsUseCase: ObservePlayerDetailsUseCase,
+    private val goBackUseCase: GoBackUseCase
 ) : AbstractViewModel<DetailsViewModel.State>(State()) {
 
     init {
@@ -22,6 +24,10 @@ class DetailsViewModel(
                 state = state.copy(player = it, loading = false)
             }
         }
+    }
+
+    fun onBackClick() {
+        goBackUseCase()
     }
 
     data class State(
