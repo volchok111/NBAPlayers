@@ -1,6 +1,7 @@
 package com.volchok.nbaplayers.feature.home.ui
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -15,6 +16,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -38,6 +41,7 @@ import com.volchok.nbaplayers.library.ui.NbaDimensions.sizeS
 import com.volchok.nbaplayers.library.ui.NbaDimensions.sizeXS
 import com.volchok.nbaplayers.library.ui.NbaLoadingDialog
 import com.volchok.nbaplayers.library.ui.NbaText
+import com.volchok.nbaplayers.library.ui.NbaTopBar
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -53,38 +57,53 @@ fun HomeScreen() {
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun HomeScreenImpl(
     pagingData: LazyPagingItems<PlayerModel>,
     state: HomeViewModel.State,
     onItem: (Int) -> Unit
 ) {
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(sizeS)
-    ) {
-        item {
-            NbaText(
-                text = stringResource(id = R.string.home_screen_title),
-                style = MaterialTheme.typography.h4,
-                fontWeight = FontWeight.Bold
+    Scaffold(
+        topBar = {
+            NbaTopBar(
+                title = stringResource(id = R.string.home_screen_top_bar_title),
             )
         }
-        items(pagingData.itemCount) { index ->
-            Spacer(modifier = Modifier.height(sizeXS))
-            ListItem(
+    ) { paddingValues ->
+        Box(
+            modifier = Modifier
+                .padding(paddingValues)
+                .fillMaxSize()
+        ) {
+            LazyColumn(
                 modifier = Modifier
-                    .clickable { pagingData[index]?.id?.let { onItem(it) } },
-                firstName = pagingData[index]?.first_name.orEmpty(),
-                lastName = pagingData[index]?.last_name.orEmpty(),
-                teamName = pagingData[index]?.team?.full_name.orEmpty()
-            )
-            Spacer(modifier = Modifier.height(sizeXS))
+                   // .fillMaxSize()
+                    .padding(sizeS)
+            ) {
+                item {
+                    NbaText(
+                        text = stringResource(id = R.string.home_screen_title),
+                        style = MaterialTheme.typography.h4,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+                items(pagingData.itemCount) { index ->
+                    Spacer(modifier = Modifier.height(sizeXS))
+                    ListItem(
+                        modifier = Modifier
+                            .clickable { pagingData[index]?.id?.let { onItem(it) } },
+                        firstName = pagingData[index]?.first_name.orEmpty(),
+                        lastName = pagingData[index]?.last_name.orEmpty(),
+                        teamName = pagingData[index]?.team?.full_name.orEmpty()
+                    )
+                    Spacer(modifier = Modifier.height(sizeXS))
+                }
+            }
+            if (state.loading) {
+                NbaLoadingDialog(title = "")
+            }
         }
-    }
-    if (state.loading) {
-        NbaLoadingDialog(title = "")
     }
 }
 
@@ -96,44 +115,44 @@ private fun ListItem(
     lastName: String,
     teamName: String
 ) {
-    Card(
-        shape = RoundedCornerShape(20.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = NbaDimensions.sizeXXS),
-        modifier = modifier
-            .fillMaxWidth()
-            .height(100.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(sizeXS),
-            verticalAlignment = Alignment.CenterVertically
+        Card(
+            shape = RoundedCornerShape(20.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = NbaDimensions.sizeXXS),
+            modifier = modifier
+                .fillMaxWidth()
+                .height(100.dp)
         ) {
-            GlideImage(
-                model = R.drawable.nba_player,
-                contentDescription = "",
-                contentScale = ContentScale.Crop,
+            Row(
                 modifier = Modifier
-                    .clip(CircleShape)
-                    .size(85.dp)
-            )
-
-            Column(
-                modifier = Modifier
-                    .padding(start = sizeS)
+                    .fillMaxSize()
+                    .padding(sizeXS),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                NbaText(
-                    text = "$firstName $lastName",
-                    style = MaterialTheme.typography.h6,
-                    color = black,
-                    fontWeight = FontWeight.Bold
+                GlideImage(
+                    model = R.drawable.nba_player,
+                    contentDescription = "",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .clip(CircleShape)
+                        .size(85.dp)
                 )
-                NbaText(
-                    text = "${stringResource(id = R.string.home_screen_team)} $teamName",
-                    style = MaterialTheme.typography.subtitle1,
-                    color = chrome400
-                )
+
+                Column(
+                    modifier = Modifier
+                        .padding(start = sizeS)
+                ) {
+                    NbaText(
+                        text = "$firstName $lastName",
+                        style = MaterialTheme.typography.h6,
+                        color = black,
+                        fontWeight = FontWeight.Bold
+                    )
+                    NbaText(
+                        text = "${stringResource(id = R.string.home_screen_team)} $teamName",
+                        style = MaterialTheme.typography.subtitle1,
+                        color = chrome400
+                    )
+                }
             }
         }
-    }
 }
