@@ -43,7 +43,7 @@ private fun SplashScreenImpl(
     Surface(
         modifier = modifier.fillMaxSize(),
         shape = RoundedCornerShape(NbaDimensions.sizeS),
-        color = NbaColors.white,
+        color = NbaColors.background,
         contentColor = NbaColors.chrome900
     ) {
         Column(

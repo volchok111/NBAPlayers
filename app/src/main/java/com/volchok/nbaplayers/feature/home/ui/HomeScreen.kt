@@ -1,5 +1,6 @@
 package com.volchok.nbaplayers.feature.home.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,6 +34,7 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.volchok.nbaplayers.R
 import com.volchok.nbaplayers.feature.home.presentation.HomeViewModel
 import com.volchok.nbaplayers.library.api.model.PlayerModel
+import com.volchok.nbaplayers.library.ui.NbaColors
 import com.volchok.nbaplayers.library.ui.NbaColors.black
 import com.volchok.nbaplayers.library.ui.NbaColors.chrome400
 import com.volchok.nbaplayers.library.ui.NbaDimensions
@@ -70,21 +72,13 @@ private fun HomeScreenImpl(
             modifier = Modifier
                 .padding(paddingValues)
                 .fillMaxSize()
+                .background(NbaColors.background)
         ) {
             LazyColumn(
                 modifier = Modifier
-                   // .fillMaxSize()
                     .padding(sizeS)
             ) {
-                item {
-                    NbaText(
-                        text = stringResource(id = R.string.home_screen_title),
-                        style = MaterialTheme.typography.h4,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
                 items(pagingData.itemCount) { index ->
-                    Spacer(modifier = Modifier.height(sizeXS))
                     ListItem(
                         modifier = Modifier
                             .clickable { pagingData[index]?.id?.let { onItem(it) } },
@@ -92,7 +86,7 @@ private fun HomeScreenImpl(
                         lastName = pagingData[index]?.last_name.orEmpty(),
                         teamName = pagingData[index]?.team?.full_name.orEmpty()
                     )
-                    Spacer(modifier = Modifier.height(sizeXS))
+                    Spacer(modifier = Modifier.height(sizeS))
                 }
             }
         }
@@ -112,7 +106,8 @@ private fun ListItem(
             elevation = CardDefaults.cardElevation(defaultElevation = NbaDimensions.sizeXXS),
             modifier = modifier
                 .fillMaxWidth()
-                .height(100.dp)
+                .height(100.dp),
+            colors = CardDefaults.cardColors(containerColor = NbaColors.chrome50)
         ) {
             Row(
                 modifier = Modifier

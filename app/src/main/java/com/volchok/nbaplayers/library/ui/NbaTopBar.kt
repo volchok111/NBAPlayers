@@ -7,18 +7,17 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.volchok.nbaplayers.R
 
 @Composable
 fun NbaTopBar(
     title: String,
-    subTitle: String? = null,
     onBackClick: (() -> Unit)? = null,
 ) {
     TopAppBar(
-        backgroundColor = NbaColors.chrome400,
-        elevation = NbaDimensions.sizeXS,
+        backgroundColor = NbaColors.background,
         title = {
             Column(
                 modifier = Modifier.padding(start = 12.dp)
@@ -26,15 +25,9 @@ fun NbaTopBar(
                 NbaText(
                     text = title,
                     style = MaterialTheme.typography.h5,
-                    color = NbaColors.black
+                    color = NbaColors.black,
+                    fontWeight = FontWeight.Bold
                 )
-                subTitle?.let {
-                    NbaText(
-                        text = it,
-                        style = MaterialTheme.typography.h6,
-                        color = NbaColors.black
-                    )
-                }
             }
         },
         navigationIcon = onBackClick?.let {
