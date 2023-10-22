@@ -19,7 +19,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -39,7 +38,6 @@ import com.volchok.nbaplayers.library.ui.NbaColors.chrome400
 import com.volchok.nbaplayers.library.ui.NbaDimensions
 import com.volchok.nbaplayers.library.ui.NbaDimensions.sizeS
 import com.volchok.nbaplayers.library.ui.NbaDimensions.sizeXS
-import com.volchok.nbaplayers.library.ui.NbaLoadingDialog
 import com.volchok.nbaplayers.library.ui.NbaText
 import com.volchok.nbaplayers.library.ui.NbaTopBar
 import org.koin.androidx.compose.getViewModel
@@ -48,11 +46,9 @@ import org.koin.androidx.compose.getViewModel
 fun HomeScreen() {
     val viewModel = getViewModel<HomeViewModel>()
     val pagingItems = viewModel.playerState.collectAsLazyPagingItems()
-    val state = viewModel.states.collectAsState()
 
     HomeScreenImpl(
         pagingData = pagingItems,
-        state = state.value,
         viewModel::onItem
     )
 }
@@ -61,7 +57,6 @@ fun HomeScreen() {
 @Composable
 private fun HomeScreenImpl(
     pagingData: LazyPagingItems<PlayerModel>,
-    state: HomeViewModel.State,
     onItem: (Int) -> Unit
 ) {
     Scaffold(
@@ -99,9 +94,6 @@ private fun HomeScreenImpl(
                     )
                     Spacer(modifier = Modifier.height(sizeXS))
                 }
-            }
-            if (state.loading) {
-                NbaLoadingDialog(title = "")
             }
         }
     }

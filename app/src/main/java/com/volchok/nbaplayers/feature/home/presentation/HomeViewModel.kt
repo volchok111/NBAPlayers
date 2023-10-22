@@ -29,9 +29,8 @@ class HomeViewModel(
                 result.value
                     .distinctUntilChanged()
                     .cachedIn(viewModelScope)
-                    .collect {
-                        _playerState.value = it
-                        state = state.copy(loading = false)
+                    .collect { players ->
+                        _playerState.value = players
                     }
             }
         }
@@ -42,6 +41,6 @@ class HomeViewModel(
     }
 
     data class State(
-        val loading: Boolean = true
+        val loading: Boolean = true,
     ) : AbstractViewModel.State
 }
