@@ -1,9 +1,10 @@
 package com.volchok.nbaplayers.app.model
 
 enum class Route {
-    Splash,
+    Details,
     Home,
-    Details;
+    Splash,
+    Team;
 
     operator fun invoke() = name.lowercase()
 

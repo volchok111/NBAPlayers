@@ -45,7 +45,8 @@ fun DetailsScreen() {
 
     DetailsScreenImpl(
         state = state.value,
-        onBackClick = viewModel::onBackClick
+        onBackClick = viewModel::onBackClick,
+        onTeamClick = viewModel::onTeamClick
     )
 }
 
@@ -53,7 +54,8 @@ fun DetailsScreen() {
 @Composable
 private fun DetailsScreenImpl(
     state: DetailsViewModel.State,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onTeamClick: (Int) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -141,7 +143,7 @@ private fun DetailsScreenImpl(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(100.dp)
-                        .clickable { },
+                        .clickable { state.player?.team?.id?.let { onTeamClick(it) } },
                     colors = CardDefaults.cardColors(containerColor = NbaColors.chrome50)
                 ) {
                     Row(

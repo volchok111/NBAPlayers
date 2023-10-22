@@ -24,6 +24,8 @@ class GlobalNavigationController :
 
     override fun goToPlayerInfo() = goTo(ForwardNavigationEvent(Route.Details))
 
+    override fun goToTeamInfo() = goTo(ForwardNavigationEvent(Route.Team))
+
     private fun goTo(navigationEvent: NavigationEvent) {
         _navigationEvent.tryEmit(navigationEvent)
     }
