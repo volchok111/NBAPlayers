@@ -7,6 +7,7 @@ import com.volchok.nbaplayers.feature.home.di.homeModule
 import com.volchok.nbaplayers.feature.team.di.teamModule
 import com.volchok.nbaplayers.library.api.di.apiModule
 import com.volchok.nbaplayers.library.memory.di.memoryModule
+import com.volchok.nbaplayers.library.networking.di.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -20,7 +21,8 @@ class MainApplication : Application() {
                 homeModule,
                 mainModule,
                 memoryModule,
-                teamModule
+                teamModule,
+                networkModule
             )
         }
         super.onCreate()

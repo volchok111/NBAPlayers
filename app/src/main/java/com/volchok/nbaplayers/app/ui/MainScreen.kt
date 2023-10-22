@@ -8,11 +8,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.volchok.nbaplayers.R
 import com.volchok.nbaplayers.app.model.BackNavigationEvent
 import com.volchok.nbaplayers.app.model.ForwardNavigationEvent
 import com.volchok.nbaplayers.app.model.Route
@@ -20,6 +22,7 @@ import com.volchok.nbaplayers.app.presentation.MainViewModel
 import com.volchok.nbaplayers.feature.details.ui.DetailsScreen
 import com.volchok.nbaplayers.feature.home.ui.HomeScreen
 import com.volchok.nbaplayers.feature.team.ui.TeamScreen
+import com.volchok.nbaplayers.library.ui.NbaAlertDialog
 import com.volchok.nbaplayers.ui.theme.NBAPlayersTheme
 import org.koin.androidx.compose.getViewModel
 
@@ -58,7 +61,13 @@ fun MainScreenImpl(
                     .weight(1f)
                     .background(MaterialTheme.colors.background)
             )
-            // TODO: Internet status dialog
+            if (state.isOffline) {
+                NbaAlertDialog(
+                    title = stringResource(id = R.string.no_internet_connection),
+                    onDismiss = { },
+                    positiveButtonText = ""
+                )
+            }
         }
     }
 }

@@ -18,4 +18,8 @@
     <string name="team_screen_conference">Conference:</string>
     <string name="team_screen_division">Division:</string>
     <string name="team_screen_name">Name:</string>
+
+    <!-- MARK: - Dialog messages -->
+    <string name="dialog_button_ok">OK</string>
+    <string name="no_internet_connection">No internet connection</string>
 </resources>

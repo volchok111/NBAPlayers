@@ -6,15 +6,22 @@ import com.volchok.nbaplayers.app.model.ForwardNavigationEvent
 import com.volchok.nbaplayers.app.model.NavigationEvent
 import com.volchok.nbaplayers.app.model.Route
 import com.volchok.nbaplayers.library.mvvm.presentation.AbstractViewModel
+import com.volchok.nbaplayers.library.networking.domain.ObserveConnectionUseCase
+import com.volchok.nbaplayers.library.networking.model.NetworkConnection
 import kotlinx.coroutines.launch
 
 class MainViewModel(
-    private val observeNavigationEventsUseCase: ObserveNavigationEventsUseCase
+    private val observeNavigationEventsUseCase: ObserveNavigationEventsUseCase,
+    private val observeConnectionUseCase: ObserveConnectionUseCase
 ) : AbstractViewModel<MainViewModel.State>(State()) {
 
     init {
         viewModelScope.launch {
             observeNavigationEventsUseCase(Unit).collect { onNavigationEvent(it) }
+        }
+
+        viewModelScope.launch {
+            observeConnectionUseCase(Unit).collect { onConnectionChanged(it) }
         }
     }
 
@@ -26,7 +33,9 @@ class MainViewModel(
         state = state.copy(navigationEvent = null)
     }
 
-    //TODO: Implement Connection status
+    private fun onConnectionChanged(connection: NetworkConnection) {
+        state = state.copy(isOffline = connection == NetworkConnection.Offline)
+    }
 
     data class State(
         val navigationEvent: NavigationEvent? = ForwardNavigationEvent(Route.Initial),
