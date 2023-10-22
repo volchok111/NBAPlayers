@@ -12,10 +12,8 @@ object NbaColors {
     val chrome100 = Color(0xFFE0E3E6)
     val chrome50 = Color(0xFFECEEF0)
 
-    val background = Color(0xFFf6f6f6)
+    val background = Color(0xFFf8fafc)
 
     val black = Color(0xFF000000)
     val white = Color(0xFFFFFFFF)
-
-    val red500 = Color(0xFFD22121)
 }

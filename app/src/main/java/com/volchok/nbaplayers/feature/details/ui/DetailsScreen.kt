@@ -1,6 +1,7 @@
 package com.volchok.nbaplayers.feature.details.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -57,7 +58,7 @@ private fun DetailsScreenImpl(
     Scaffold(
         topBar = {
             NbaTopBar(
-                title = stringResource(id = R.string.details_screen_top_bar_title),
+                title = "${state.player?.first_name} ${state.player?.last_name}",
                 onBackClick = { onBackClick() }
             )
         }
@@ -66,6 +67,7 @@ private fun DetailsScreenImpl(
             modifier = Modifier
                 .padding(paddingValues)
                 .fillMaxSize()
+                .background(NbaColors.background)
         ) {
             Column(
                 modifier = Modifier
@@ -76,7 +78,8 @@ private fun DetailsScreenImpl(
                     shape = RoundedCornerShape(20.dp),
                     elevation = CardDefaults.cardElevation(defaultElevation = NbaDimensions.sizeXXS),
                     modifier = Modifier
-                        .fillMaxWidth()
+                        .fillMaxWidth(),
+                    colors = CardDefaults.cardColors(containerColor = NbaColors.chrome50)
                 ) {
                     Row(
                         modifier = Modifier
@@ -138,7 +141,8 @@ private fun DetailsScreenImpl(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(100.dp)
-                        .clickable { }
+                        .clickable { },
+                    colors = CardDefaults.cardColors(containerColor = NbaColors.chrome50)
                 ) {
                     Row(
                         horizontalArrangement = Arrangement.SpaceBetween,
